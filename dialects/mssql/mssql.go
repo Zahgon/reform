@@ -9,36 +9,27 @@ import (
 
 type mssql struct{}
 
-func (mssql) String() string {
-	return "mssql"
-}
+func (mssql) String() string { _ = "STUB: not implemented"; return "" }
 
-func (mssql) Placeholder(index int) string {
-	return "?"
-}
+func (mssql) Placeholder(index int) string { _ = "STUB: not implemented"; return "" }
 
-func (mssql) Placeholders(start, count int) []string {
-	res := make([]string, count)
-	for i := 0; i < count; i++ {
-		res[i] = "?"
-	}
-	return res
-}
+func (mssql) Placeholders(start, count int) []string { _ = "STUB: not implemented"; return nil }
 
-func (mssql) QuoteIdentifier(identifier string) string {
-	return "[" + identifier + "]"
-}
+func (mssql) QuoteIdentifier(identifier string) string { _ = "STUB: not implemented"; return "" }
 
 func (mssql) LastInsertIdMethod() reform.LastInsertIdMethod {
-	return reform.OutputInserted
+	_ = "STUB: not implemented"
+	return *new(reform.LastInsertIdMethod)
 }
 
 func (mssql) SelectLimitMethod() reform.SelectLimitMethod {
-	return reform.SelectTop
+	_ = "STUB: not implemented"
+	return *new(reform.SelectLimitMethod)
 }
 
 func (mssql) DefaultValuesMethod() reform.DefaultValuesMethod {
-	return reform.DefaultValues
+	_ = "STUB: not implemented"
+	return *new(reform.DefaultValuesMethod)
 }
 
 // Dialect implements reform.Dialect for Microsoft SQL Server.

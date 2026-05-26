@@ -7,36 +7,27 @@ import (
 
 type sqlite3 struct{}
 
-func (sqlite3) String() string {
-	return "sqlite3"
-}
+func (sqlite3) String() string { _ = "STUB: not implemented"; return "" }
 
-func (sqlite3) Placeholder(index int) string {
-	return "?"
-}
+func (sqlite3) Placeholder(index int) string { _ = "STUB: not implemented"; return "" }
 
-func (sqlite3) Placeholders(start, count int) []string {
-	res := make([]string, count)
-	for i := 0; i < count; i++ {
-		res[i] = "?"
-	}
-	return res
-}
+func (sqlite3) Placeholders(start, count int) []string { _ = "STUB: not implemented"; return nil }
 
-func (sqlite3) QuoteIdentifier(identifier string) string {
-	return `"` + identifier + `"`
-}
+func (sqlite3) QuoteIdentifier(identifier string) string { _ = "STUB: not implemented"; return "" }
 
 func (sqlite3) LastInsertIdMethod() reform.LastInsertIdMethod {
-	return reform.LastInsertId
+	_ = "STUB: not implemented"
+	return *new(reform.LastInsertIdMethod)
 }
 
 func (sqlite3) SelectLimitMethod() reform.SelectLimitMethod {
-	return reform.Limit
+	_ = "STUB: not implemented"
+	return *new(reform.SelectLimitMethod)
 }
 
 func (sqlite3) DefaultValuesMethod() reform.DefaultValuesMethod {
-	return reform.DefaultValues
+	_ = "STUB: not implemented"
+	return *new(reform.DefaultValuesMethod)
 }
 
 // Dialect implements reform.Dialect for SQLite3.

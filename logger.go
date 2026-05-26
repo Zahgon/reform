@@ -1,36 +1,11 @@
 package reform
 
 import (
-	"fmt"
-	"reflect"
-	"strings"
 	"time"
 )
 
 // Inspect returns suitable for logging representation of a query argument.
-func Inspect(arg interface{}, addType bool) string {
-	var s string
-	v := reflect.ValueOf(arg)
-	switch v.Kind() {
-	case reflect.Ptr:
-		if v.IsNil() {
-			s = "<nil>"
-		} else {
-			s = Inspect(v.Elem().Interface(), false)
-		}
-
-	case reflect.String:
-		s = fmt.Sprintf("%#q", arg)
-
-	default:
-		s = fmt.Sprintf("%v", arg)
-	}
-
-	if addType {
-		s += fmt.Sprintf(" (%T)", arg)
-	}
-	return s
-}
+func Inspect(arg interface{}, addType bool) string { _ = "STUB: not implemented"; return "" }
 
 // Logger is responsible to log queries before and after their execution.
 type Logger interface {
@@ -51,48 +26,20 @@ type PrintfLogger struct {
 }
 
 // NewPrintfLogger creates a new simple query logger for any Printf-like function.
-func NewPrintfLogger(printf Printf) *PrintfLogger {
-	return &PrintfLogger{false, printf}
-}
+func NewPrintfLogger(printf Printf) *PrintfLogger { _ = "STUB: not implemented"; return nil }
 
 // Before logs query before execution.
 func (pl *PrintfLogger) Before(query string, args []interface{}) {
+	_ = "STUB: not implemented"
 	// fast path
-	if args == nil {
-		pl.printf(">>> %s", query)
-		return
-	}
-
-	ss := make([]string, len(args))
-	for i, arg := range args {
-		ss[i] = Inspect(arg, pl.LogTypes)
-	}
-
-	pl.printf(">>> %s [%s]", query, strings.Join(ss, ", "))
+	return
 }
 
 // After logs query after execution.
 func (pl *PrintfLogger) After(query string, args []interface{}, d time.Duration, err error) {
+	_ = "STUB: not implemented"
 	// fast path
-	if args == nil {
-		msg := fmt.Sprintf("%s %s", query, d)
-		if err != nil {
-			msg += ": " + err.Error()
-		}
-		pl.printf("<<< %s", msg)
-		return
-	}
-
-	ss := make([]string, len(args))
-	for i, arg := range args {
-		ss[i] = Inspect(arg, pl.LogTypes)
-	}
-
-	msg := fmt.Sprintf("%s [%s] %s", query, strings.Join(ss, ", "), d)
-	if err != nil {
-		msg += ": " + err.Error()
-	}
-	pl.printf("<<< %s", msg)
+	return
 }
 
 // check interface

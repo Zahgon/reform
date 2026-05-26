@@ -7,39 +7,32 @@ import (
 
 type mysql struct{}
 
-func (mysql) String() string {
-	return "mysql"
-}
+func (mysql) String() string { _ = "STUB: not implemented"; return "" }
 
-func (mysql) Placeholder(index int) string {
-	return "?"
-}
+func (mysql) Placeholder(index int) string { _ = "STUB: not implemented"; return "" }
 
-func (mysql) Placeholders(start, count int) []string {
-	res := make([]string, count)
-	for i := 0; i < count; i++ {
-		res[i] = "?"
-	}
-	return res
-}
+func (mysql) Placeholders(start, count int) []string { _ = "STUB: not implemented"; return nil }
 
-func (mysql) QuoteIdentifier(identifier string) string {
-	return "`" + identifier + "`"
-}
+func (mysql) QuoteIdentifier(identifier string) string { _ = "STUB: not implemented"; return "" }
 
 func (mysql) LastInsertIdMethod() reform.LastInsertIdMethod {
-	return reform.LastInsertId
+	_ = "STUB: not implemented"
+	return *new(reform.LastInsertIdMethod)
 }
 
 func (mysql) SelectLimitMethod() reform.SelectLimitMethod {
-	return reform.Limit
+	_ = "STUB: not implemented"
+	return *new(reform.SelectLimitMethod)
 }
 
 func (mysql) DefaultValuesMethod() reform.DefaultValuesMethod {
-	return reform.EmptyLists
+	_ = "STUB: not implemented"
+	return *
+
+	// Dialect implements reform.Dialect for MySQL.
+	new(reform.DefaultValuesMethod)
 }
 
-// Dialect implements reform.Dialect for MySQL.
 var Dialect mysql
 
 // check interface

@@ -8,7 +8,6 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
-	"time"
 
 	_ "github.com/denisenkom/go-mssqldb"
 	_ "github.com/go-sql-driver/mysql"
@@ -17,7 +16,6 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 
 	"gopkg.in/reform.v1"
-	"gopkg.in/reform.v1/dialects"
 	"gopkg.in/reform.v1/internal"
 )
 
@@ -46,40 +44,10 @@ func init() {
 	}
 }
 
-func getDB() *reform.DB {
-	if *driverF == "" || *sourceF == "" {
-		logger.Fatalf("Please set both -db-driver and -db-source flags.")
-	}
-	sqlDB, err := sql.Open(*driverF, *sourceF)
-	if err != nil {
-		logger.Fatalf("Failed to connect to %s %q: %s", *driverF, *sourceF, err)
-	}
+func getDB() *reform.DB { _ = "STUB: not implemented"; return nil }
 
-	// Use single connection so various session-related variables work.
-	// For example: "PRAGMA foreign_keys" for SQLite3, "SET IDENTITY_INSERT" for MS SQL, etc.
-	sqlDB.SetMaxIdleConns(1)
-	sqlDB.SetMaxOpenConns(1)
-	sqlDB.SetConnMaxLifetime(0)
-
-	start := time.Now()
-	for {
-		err = sqlDB.Ping()
-		if err == nil {
-			break
-		}
-
-		if time.Since(start) > *waitF {
-			logger.Fatalf("Failed to ping database: %s.", err)
-		}
-
-		logger.Debugf("Failed to ping database: %s.", err)
-		time.Sleep(time.Second)
-	}
-
-	logger.Debugf("Connected to database.")
-	dialect := dialects.ForDriver(*driverF)
-	return reform.NewDB(sqlDB, dialect, reform.NewPrintfLogger(logger.Debugf))
-}
+// Use single connection so various session-related variables work.
+// For example: "PRAGMA foreign_keys" for SQLite3, "SET IDENTITY_INSERT" for MS SQL, etc.
 
 func main() {
 	flag.Parse()

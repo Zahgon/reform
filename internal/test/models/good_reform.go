@@ -4,7 +4,6 @@ package models
 
 import (
 	"fmt"
-	"strings"
 
 	"gopkg.in/reform.v1"
 	"gopkg.in/reform.v1/parse"
@@ -16,41 +15,36 @@ type personTableType struct {
 }
 
 // Schema returns a schema name in SQL database ("").
-func (v *personTableType) Schema() string {
-	return v.s.SQLSchema
-}
+func (v *personTableType) Schema() string { _ = "STUB: not implemented"; return "" }
 
 // Name returns a view or table name in SQL database ("people").
 func (v *personTableType) Name() string {
-	return v.s.SQLName
+	_ = "STUB: not implemented"
+
+	// Columns returns a new slice of column names for that view or table in SQL database.
+	return ""
 }
 
-// Columns returns a new slice of column names for that view or table in SQL database.
-func (v *personTableType) Columns() []string {
-	return []string{
-		"id",
-		"group_id",
-		"name",
-		"email",
-		"created_at",
-		"updated_at",
-	}
-}
+func (v *personTableType) Columns() []string { _ = "STUB: not implemented"; return nil }
 
 // NewStruct makes a new struct for that view or table.
 func (v *personTableType) NewStruct() reform.Struct {
-	return new(Person)
+	_ = "STUB: not implemented"
+	return *
+
+	// NewRecord makes a new record for that table.
+	new(reform.Struct)
 }
 
-// NewRecord makes a new record for that table.
 func (v *personTableType) NewRecord() reform.Record {
-	return new(Person)
+	_ = "STUB: not implemented"
+	return *
+
+	// PKColumnIndex returns an index of primary key column for that table in SQL database.
+	new(reform.Record)
 }
 
-// PKColumnIndex returns an index of primary key column for that table in SQL database.
-func (v *personTableType) PKColumnIndex() uint {
-	return uint(v.s.PKFieldIndex)
-}
+func (v *personTableType) PKColumnIndex() uint { _ = "STUB: not implemented"; return 0 }
 
 // PersonTable represents people view or table in SQL database.
 var PersonTable = &personTableType{
@@ -71,76 +65,53 @@ var PersonTable = &personTableType{
 }
 
 // String returns a string representation of this struct or record.
-func (s Person) String() string {
-	res := make([]string, 6)
-	res[0] = "ID: " + reform.Inspect(s.ID, true)
-	res[1] = "GroupID: " + reform.Inspect(s.GroupID, true)
-	res[2] = "Name: " + reform.Inspect(s.Name, true)
-	res[3] = "Email: " + reform.Inspect(s.Email, true)
-	res[4] = "CreatedAt: " + reform.Inspect(s.CreatedAt, true)
-	res[5] = "UpdatedAt: " + reform.Inspect(s.UpdatedAt, true)
-	return strings.Join(res, ", ")
-}
+func (s Person) String() string { _ = "STUB: not implemented"; return "" }
 
 // Values returns a slice of struct or record field values.
 // Returned interface{} values are never untyped nils.
-func (s *Person) Values() []interface{} {
-	return []interface{}{
-		s.ID,
-		s.GroupID,
-		s.Name,
-		s.Email,
-		s.CreatedAt,
-		s.UpdatedAt,
-	}
-}
+func (s *Person) Values() []interface{} { _ = "STUB: not implemented"; return nil }
 
 // Pointers returns a slice of pointers to struct or record fields.
 // Returned interface{} values are never untyped nils.
-func (s *Person) Pointers() []interface{} {
-	return []interface{}{
-		&s.ID,
-		&s.GroupID,
-		&s.Name,
-		&s.Email,
-		&s.CreatedAt,
-		&s.UpdatedAt,
-	}
-}
+func (s *Person) Pointers() []interface{} { _ = "STUB: not implemented"; return nil }
 
 // View returns View object for that struct.
 func (s *Person) View() reform.View {
-	return PersonTable
+	_ = "STUB: not implemented"
+
+	// Table returns Table object for that record.
+	return *new(reform.View)
 }
 
-// Table returns Table object for that record.
 func (s *Person) Table() reform.Table {
-	return PersonTable
+	_ = "STUB: not implemented"
+
+	// PKValue returns a value of primary key for that record.
+	// Returned interface{} value is never untyped nil.
+	return *new(reform.Table)
 }
 
-// PKValue returns a value of primary key for that record.
-// Returned interface{} value is never untyped nil.
 func (s *Person) PKValue() interface{} {
-	return s.ID
+	_ = "STUB: not implemented"
+
+	// PKPointer returns a pointer to primary key field for that record.
+	// Returned interface{} value is never untyped nil.
+	return nil
 }
 
-// PKPointer returns a pointer to primary key field for that record.
-// Returned interface{} value is never untyped nil.
 func (s *Person) PKPointer() interface{} {
-	return &s.ID
+	_ = "STUB: not implemented"
+
+	// HasPK returns true if record has non-zero primary key set, false otherwise.
+	return nil
 }
 
-// HasPK returns true if record has non-zero primary key set, false otherwise.
-func (s *Person) HasPK() bool {
-	return s.ID != PersonTable.z[PersonTable.s.PKFieldIndex]
-}
+func (s *Person) HasPK() bool { _ = "STUB: not implemented"; return false }
 
 // SetPK sets record primary key, if possible.
 //
 // Deprecated: prefer direct field assignment where possible: s.ID = pk.
-func (s *Person) SetPK(pk interface{}) {
-	reform.SetPK(s, pk)
-}
+func (s *Person) SetPK(pk interface{}) { _ = "STUB: not implemented"; return }
 
 // check interfaces
 var (
@@ -157,39 +128,36 @@ type projectTableType struct {
 }
 
 // Schema returns a schema name in SQL database ("").
-func (v *projectTableType) Schema() string {
-	return v.s.SQLSchema
-}
+func (v *projectTableType) Schema() string { _ = "STUB: not implemented"; return "" }
 
 // Name returns a view or table name in SQL database ("projects").
 func (v *projectTableType) Name() string {
-	return v.s.SQLName
+	_ = "STUB: not implemented"
+
+	// Columns returns a new slice of column names for that view or table in SQL database.
+	return ""
 }
 
-// Columns returns a new slice of column names for that view or table in SQL database.
-func (v *projectTableType) Columns() []string {
-	return []string{
-		"name",
-		"id",
-		"start",
-		"end",
-	}
-}
+func (v *projectTableType) Columns() []string { _ = "STUB: not implemented"; return nil }
 
 // NewStruct makes a new struct for that view or table.
 func (v *projectTableType) NewStruct() reform.Struct {
-	return new(Project)
+	_ = "STUB: not implemented"
+	return *
+
+	// NewRecord makes a new record for that table.
+	new(reform.Struct)
 }
 
-// NewRecord makes a new record for that table.
 func (v *projectTableType) NewRecord() reform.Record {
-	return new(Project)
+	_ = "STUB: not implemented"
+	return *
+
+	// PKColumnIndex returns an index of primary key column for that table in SQL database.
+	new(reform.Record)
 }
 
-// PKColumnIndex returns an index of primary key column for that table in SQL database.
-func (v *projectTableType) PKColumnIndex() uint {
-	return uint(v.s.PKFieldIndex)
-}
+func (v *projectTableType) PKColumnIndex() uint { _ = "STUB: not implemented"; return 0 }
 
 // ProjectTable represents projects view or table in SQL database.
 var ProjectTable = &projectTableType{
@@ -208,70 +176,55 @@ var ProjectTable = &projectTableType{
 }
 
 // String returns a string representation of this struct or record.
-func (s Project) String() string {
-	res := make([]string, 4)
-	res[0] = "Name: " + reform.Inspect(s.Name, true)
-	res[1] = "ID: " + reform.Inspect(s.ID, true)
-	res[2] = "Start: " + reform.Inspect(s.Start, true)
-	res[3] = "End: " + reform.Inspect(s.End, true)
-	return strings.Join(res, ", ")
-}
+func (s Project) String() string { _ = "STUB: not implemented"; return "" }
 
 // Values returns a slice of struct or record field values.
 // Returned interface{} values are never untyped nils.
-func (s *Project) Values() []interface{} {
-	return []interface{}{
-		s.Name,
-		s.ID,
-		s.Start,
-		s.End,
-	}
-}
+func (s *Project) Values() []interface{} { _ = "STUB: not implemented"; return nil }
 
 // Pointers returns a slice of pointers to struct or record fields.
 // Returned interface{} values are never untyped nils.
-func (s *Project) Pointers() []interface{} {
-	return []interface{}{
-		&s.Name,
-		&s.ID,
-		&s.Start,
-		&s.End,
-	}
-}
+func (s *Project) Pointers() []interface{} { _ = "STUB: not implemented"; return nil }
 
 // View returns View object for that struct.
 func (s *Project) View() reform.View {
-	return ProjectTable
+	_ = "STUB: not implemented"
+	return *
+
+	// Table returns Table object for that record.
+	new(reform.View)
 }
 
-// Table returns Table object for that record.
 func (s *Project) Table() reform.Table {
-	return ProjectTable
+	_ = "STUB: not implemented"
+	return *
+
+	// PKValue returns a value of primary key for that record.
+	// Returned interface{} value is never untyped nil.
+	new(reform.Table)
 }
 
-// PKValue returns a value of primary key for that record.
-// Returned interface{} value is never untyped nil.
 func (s *Project) PKValue() interface{} {
-	return s.ID
+	_ = "STUB: not implemented"
+
+	// PKPointer returns a pointer to primary key field for that record.
+	// Returned interface{} value is never untyped nil.
+	return nil
 }
 
-// PKPointer returns a pointer to primary key field for that record.
-// Returned interface{} value is never untyped nil.
 func (s *Project) PKPointer() interface{} {
-	return &s.ID
+	_ = "STUB: not implemented"
+
+	// HasPK returns true if record has non-zero primary key set, false otherwise.
+	return nil
 }
 
-// HasPK returns true if record has non-zero primary key set, false otherwise.
-func (s *Project) HasPK() bool {
-	return s.ID != ProjectTable.z[ProjectTable.s.PKFieldIndex]
-}
+func (s *Project) HasPK() bool { _ = "STUB: not implemented"; return false }
 
 // SetPK sets record primary key, if possible.
 //
 // Deprecated: prefer direct field assignment where possible: s.ID = pk.
-func (s *Project) SetPK(pk interface{}) {
-	reform.SetPK(s, pk)
-}
+func (s *Project) SetPK(pk interface{}) { _ = "STUB: not implemented"; return }
 
 // check interfaces
 var (
@@ -288,26 +241,22 @@ type personProjectViewType struct {
 }
 
 // Schema returns a schema name in SQL database ("").
-func (v *personProjectViewType) Schema() string {
-	return v.s.SQLSchema
-}
+func (v *personProjectViewType) Schema() string { _ = "STUB: not implemented"; return "" }
 
 // Name returns a view or table name in SQL database ("person_project").
 func (v *personProjectViewType) Name() string {
-	return v.s.SQLName
+	_ = "STUB: not implemented"
+
+	// Columns returns a new slice of column names for that view or table in SQL database.
+	return ""
 }
 
-// Columns returns a new slice of column names for that view or table in SQL database.
-func (v *personProjectViewType) Columns() []string {
-	return []string{
-		"person_id",
-		"project_id",
-	}
-}
+func (v *personProjectViewType) Columns() []string { _ = "STUB: not implemented"; return nil }
 
 // NewStruct makes a new struct for that view or table.
 func (v *personProjectViewType) NewStruct() reform.Struct {
-	return new(PersonProject)
+	_ = "STUB: not implemented"
+	return *new(reform.Struct)
 }
 
 // PersonProjectView represents person_project view or table in SQL database.
@@ -325,37 +274,25 @@ var PersonProjectView = &personProjectViewType{
 }
 
 // String returns a string representation of this struct or record.
-func (s PersonProject) String() string {
-	res := make([]string, 2)
-	res[0] = "PersonID: " + reform.Inspect(s.PersonID, true)
-	res[1] = "ProjectID: " + reform.Inspect(s.ProjectID, true)
-	return strings.Join(res, ", ")
-}
+func (s PersonProject) String() string { _ = "STUB: not implemented"; return "" }
 
 // Values returns a slice of struct or record field values.
 // Returned interface{} values are never untyped nils.
-func (s *PersonProject) Values() []interface{} {
-	return []interface{}{
-		s.PersonID,
-		s.ProjectID,
-	}
-}
+func (s *PersonProject) Values() []interface{} { _ = "STUB: not implemented"; return nil }
 
 // Pointers returns a slice of pointers to struct or record fields.
 // Returned interface{} values are never untyped nils.
-func (s *PersonProject) Pointers() []interface{} {
-	return []interface{}{
-		&s.PersonID,
-		&s.ProjectID,
-	}
-}
+func (s *PersonProject) Pointers() []interface{} { _ = "STUB: not implemented"; return nil }
 
 // View returns View object for that struct.
 func (s *PersonProject) View() reform.View {
-	return PersonProjectView
+	_ = "STUB: not implemented"
+	return *
+
+	// check interfaces
+	new(reform.View)
 }
 
-// check interfaces
 var (
 	_ reform.View   = PersonProjectView
 	_ reform.Struct = (*PersonProject)(nil)
@@ -368,36 +305,36 @@ type iDOnlyTableType struct {
 }
 
 // Schema returns a schema name in SQL database ("").
-func (v *iDOnlyTableType) Schema() string {
-	return v.s.SQLSchema
-}
+func (v *iDOnlyTableType) Schema() string { _ = "STUB: not implemented"; return "" }
 
 // Name returns a view or table name in SQL database ("id_only").
 func (v *iDOnlyTableType) Name() string {
-	return v.s.SQLName
+	_ = "STUB: not implemented"
+
+	// Columns returns a new slice of column names for that view or table in SQL database.
+	return ""
 }
 
-// Columns returns a new slice of column names for that view or table in SQL database.
-func (v *iDOnlyTableType) Columns() []string {
-	return []string{
-		"id",
-	}
-}
+func (v *iDOnlyTableType) Columns() []string { _ = "STUB: not implemented"; return nil }
 
 // NewStruct makes a new struct for that view or table.
 func (v *iDOnlyTableType) NewStruct() reform.Struct {
-	return new(IDOnly)
+	_ = "STUB: not implemented"
+	return *
+
+	// NewRecord makes a new record for that table.
+	new(reform.Struct)
 }
 
-// NewRecord makes a new record for that table.
 func (v *iDOnlyTableType) NewRecord() reform.Record {
-	return new(IDOnly)
+	_ = "STUB: not implemented"
+	return *
+
+	// PKColumnIndex returns an index of primary key column for that table in SQL database.
+	new(reform.Record)
 }
 
-// PKColumnIndex returns an index of primary key column for that table in SQL database.
-func (v *iDOnlyTableType) PKColumnIndex() uint {
-	return uint(v.s.PKFieldIndex)
-}
+func (v *iDOnlyTableType) PKColumnIndex() uint { _ = "STUB: not implemented"; return 0 }
 
 // IDOnlyTable represents id_only view or table in SQL database.
 var IDOnlyTable = &iDOnlyTableType{
@@ -413,61 +350,53 @@ var IDOnlyTable = &iDOnlyTableType{
 }
 
 // String returns a string representation of this struct or record.
-func (s IDOnly) String() string {
-	res := make([]string, 1)
-	res[0] = "ID: " + reform.Inspect(s.ID, true)
-	return strings.Join(res, ", ")
-}
+func (s IDOnly) String() string { _ = "STUB: not implemented"; return "" }
 
 // Values returns a slice of struct or record field values.
 // Returned interface{} values are never untyped nils.
-func (s *IDOnly) Values() []interface{} {
-	return []interface{}{
-		s.ID,
-	}
-}
+func (s *IDOnly) Values() []interface{} { _ = "STUB: not implemented"; return nil }
 
 // Pointers returns a slice of pointers to struct or record fields.
 // Returned interface{} values are never untyped nils.
-func (s *IDOnly) Pointers() []interface{} {
-	return []interface{}{
-		&s.ID,
-	}
-}
+func (s *IDOnly) Pointers() []interface{} { _ = "STUB: not implemented"; return nil }
 
 // View returns View object for that struct.
 func (s *IDOnly) View() reform.View {
-	return IDOnlyTable
+	_ = "STUB: not implemented"
+
+	// Table returns Table object for that record.
+	return *new(reform.View)
 }
 
-// Table returns Table object for that record.
 func (s *IDOnly) Table() reform.Table {
-	return IDOnlyTable
+	_ = "STUB: not implemented"
+
+	// PKValue returns a value of primary key for that record.
+	// Returned interface{} value is never untyped nil.
+	return *new(reform.Table)
 }
 
-// PKValue returns a value of primary key for that record.
-// Returned interface{} value is never untyped nil.
 func (s *IDOnly) PKValue() interface{} {
-	return s.ID
+	_ = "STUB: not implemented"
+
+	// PKPointer returns a pointer to primary key field for that record.
+	// Returned interface{} value is never untyped nil.
+	return nil
 }
 
-// PKPointer returns a pointer to primary key field for that record.
-// Returned interface{} value is never untyped nil.
 func (s *IDOnly) PKPointer() interface{} {
-	return &s.ID
+	_ = "STUB: not implemented"
+
+	// HasPK returns true if record has non-zero primary key set, false otherwise.
+	return nil
 }
 
-// HasPK returns true if record has non-zero primary key set, false otherwise.
-func (s *IDOnly) HasPK() bool {
-	return s.ID != IDOnlyTable.z[IDOnlyTable.s.PKFieldIndex]
-}
+func (s *IDOnly) HasPK() bool { _ = "STUB: not implemented"; return false }
 
 // SetPK sets record primary key, if possible.
 //
 // Deprecated: prefer direct field assignment where possible: s.ID = pk.
-func (s *IDOnly) SetPK(pk interface{}) {
-	reform.SetPK(s, pk)
-}
+func (s *IDOnly) SetPK(pk interface{}) { _ = "STUB: not implemented"; return }
 
 // check interfaces
 var (
@@ -484,37 +413,36 @@ type constraintsTableType struct {
 }
 
 // Schema returns a schema name in SQL database ("").
-func (v *constraintsTableType) Schema() string {
-	return v.s.SQLSchema
-}
+func (v *constraintsTableType) Schema() string { _ = "STUB: not implemented"; return "" }
 
 // Name returns a view or table name in SQL database ("constraints").
 func (v *constraintsTableType) Name() string {
-	return v.s.SQLName
+	_ = "STUB: not implemented"
+
+	// Columns returns a new slice of column names for that view or table in SQL database.
+	return ""
 }
 
-// Columns returns a new slice of column names for that view or table in SQL database.
-func (v *constraintsTableType) Columns() []string {
-	return []string{
-		"i",
-		"id",
-	}
-}
+func (v *constraintsTableType) Columns() []string { _ = "STUB: not implemented"; return nil }
 
 // NewStruct makes a new struct for that view or table.
 func (v *constraintsTableType) NewStruct() reform.Struct {
-	return new(Constraints)
+	_ = "STUB: not implemented"
+	return *
+
+	// NewRecord makes a new record for that table.
+	new(reform.Struct)
 }
 
-// NewRecord makes a new record for that table.
 func (v *constraintsTableType) NewRecord() reform.Record {
-	return new(Constraints)
+	_ = "STUB: not implemented"
+	return *
+
+	// PKColumnIndex returns an index of primary key column for that table in SQL database.
+	new(reform.Record)
 }
 
-// PKColumnIndex returns an index of primary key column for that table in SQL database.
-func (v *constraintsTableType) PKColumnIndex() uint {
-	return uint(v.s.PKFieldIndex)
-}
+func (v *constraintsTableType) PKColumnIndex() uint { _ = "STUB: not implemented"; return 0 }
 
 // ConstraintsTable represents constraints view or table in SQL database.
 var ConstraintsTable = &constraintsTableType{
@@ -531,64 +459,55 @@ var ConstraintsTable = &constraintsTableType{
 }
 
 // String returns a string representation of this struct or record.
-func (s Constraints) String() string {
-	res := make([]string, 2)
-	res[0] = "I: " + reform.Inspect(s.I, true)
-	res[1] = "ID: " + reform.Inspect(s.ID, true)
-	return strings.Join(res, ", ")
-}
+func (s Constraints) String() string { _ = "STUB: not implemented"; return "" }
 
 // Values returns a slice of struct or record field values.
 // Returned interface{} values are never untyped nils.
-func (s *Constraints) Values() []interface{} {
-	return []interface{}{
-		s.I,
-		s.ID,
-	}
-}
+func (s *Constraints) Values() []interface{} { _ = "STUB: not implemented"; return nil }
 
 // Pointers returns a slice of pointers to struct or record fields.
 // Returned interface{} values are never untyped nils.
-func (s *Constraints) Pointers() []interface{} {
-	return []interface{}{
-		&s.I,
-		&s.ID,
-	}
-}
+func (s *Constraints) Pointers() []interface{} { _ = "STUB: not implemented"; return nil }
 
 // View returns View object for that struct.
 func (s *Constraints) View() reform.View {
-	return ConstraintsTable
+	_ = "STUB: not implemented"
+	return *
+
+	// Table returns Table object for that record.
+	new(reform.View)
 }
 
-// Table returns Table object for that record.
 func (s *Constraints) Table() reform.Table {
-	return ConstraintsTable
+	_ = "STUB: not implemented"
+	return *
+
+	// PKValue returns a value of primary key for that record.
+	// Returned interface{} value is never untyped nil.
+	new(reform.Table)
 }
 
-// PKValue returns a value of primary key for that record.
-// Returned interface{} value is never untyped nil.
 func (s *Constraints) PKValue() interface{} {
-	return s.ID
+	_ = "STUB: not implemented"
+
+	// PKPointer returns a pointer to primary key field for that record.
+	// Returned interface{} value is never untyped nil.
+	return nil
 }
 
-// PKPointer returns a pointer to primary key field for that record.
-// Returned interface{} value is never untyped nil.
 func (s *Constraints) PKPointer() interface{} {
-	return &s.ID
+	_ = "STUB: not implemented"
+
+	// HasPK returns true if record has non-zero primary key set, false otherwise.
+	return nil
 }
 
-// HasPK returns true if record has non-zero primary key set, false otherwise.
-func (s *Constraints) HasPK() bool {
-	return s.ID != ConstraintsTable.z[ConstraintsTable.s.PKFieldIndex]
-}
+func (s *Constraints) HasPK() bool { _ = "STUB: not implemented"; return false }
 
 // SetPK sets record primary key, if possible.
 //
 // Deprecated: prefer direct field assignment where possible: s.ID = pk.
-func (s *Constraints) SetPK(pk interface{}) {
-	reform.SetPK(s, pk)
-}
+func (s *Constraints) SetPK(pk interface{}) { _ = "STUB: not implemented"; return }
 
 // check interfaces
 var (
@@ -605,30 +524,27 @@ type compositePkViewType struct {
 }
 
 // Schema returns a schema name in SQL database ("").
-func (v *compositePkViewType) Schema() string {
-	return v.s.SQLSchema
-}
+func (v *compositePkViewType) Schema() string { _ = "STUB: not implemented"; return "" }
 
 // Name returns a view or table name in SQL database ("composite_pk").
 func (v *compositePkViewType) Name() string {
-	return v.s.SQLName
+	_ = "STUB: not implemented"
+
+	// Columns returns a new slice of column names for that view or table in SQL database.
+	return ""
 }
 
-// Columns returns a new slice of column names for that view or table in SQL database.
-func (v *compositePkViewType) Columns() []string {
-	return []string{
-		"i",
-		"name",
-		"j",
-	}
-}
+func (v *compositePkViewType) Columns() []string { _ = "STUB: not implemented"; return nil }
 
 // NewStruct makes a new struct for that view or table.
 func (v *compositePkViewType) NewStruct() reform.Struct {
-	return new(CompositePk)
+	_ = "STUB: not implemented"
+	return *
+
+	// CompositePkView represents composite_pk view or table in SQL database.
+	new(reform.Struct)
 }
 
-// CompositePkView represents composite_pk view or table in SQL database.
 var CompositePkView = &compositePkViewType{
 	s: parse.StructInfo{
 		Type:    "CompositePk",
@@ -644,40 +560,25 @@ var CompositePkView = &compositePkViewType{
 }
 
 // String returns a string representation of this struct or record.
-func (s CompositePk) String() string {
-	res := make([]string, 3)
-	res[0] = "I: " + reform.Inspect(s.I, true)
-	res[1] = "Name: " + reform.Inspect(s.Name, true)
-	res[2] = "J: " + reform.Inspect(s.J, true)
-	return strings.Join(res, ", ")
-}
+func (s CompositePk) String() string { _ = "STUB: not implemented"; return "" }
 
 // Values returns a slice of struct or record field values.
 // Returned interface{} values are never untyped nils.
-func (s *CompositePk) Values() []interface{} {
-	return []interface{}{
-		s.I,
-		s.Name,
-		s.J,
-	}
-}
+func (s *CompositePk) Values() []interface{} { _ = "STUB: not implemented"; return nil }
 
 // Pointers returns a slice of pointers to struct or record fields.
 // Returned interface{} values are never untyped nils.
-func (s *CompositePk) Pointers() []interface{} {
-	return []interface{}{
-		&s.I,
-		&s.Name,
-		&s.J,
-	}
-}
+func (s *CompositePk) Pointers() []interface{} { _ = "STUB: not implemented"; return nil }
 
 // View returns View object for that struct.
 func (s *CompositePk) View() reform.View {
-	return CompositePkView
+	_ = "STUB: not implemented"
+	return *
+
+	// check interfaces
+	new(reform.View)
 }
 
-// check interfaces
 var (
 	_ reform.View   = CompositePkView
 	_ reform.Struct = (*CompositePk)(nil)
@@ -690,37 +591,36 @@ type legacyPersonTableType struct {
 }
 
 // Schema returns a schema name in SQL database ("legacy").
-func (v *legacyPersonTableType) Schema() string {
-	return v.s.SQLSchema
-}
+func (v *legacyPersonTableType) Schema() string { _ = "STUB: not implemented"; return "" }
 
 // Name returns a view or table name in SQL database ("people").
 func (v *legacyPersonTableType) Name() string {
-	return v.s.SQLName
+	_ = "STUB: not implemented"
+
+	// Columns returns a new slice of column names for that view or table in SQL database.
+	return ""
 }
 
-// Columns returns a new slice of column names for that view or table in SQL database.
-func (v *legacyPersonTableType) Columns() []string {
-	return []string{
-		"id",
-		"name",
-	}
-}
+func (v *legacyPersonTableType) Columns() []string { _ = "STUB: not implemented"; return nil }
 
 // NewStruct makes a new struct for that view or table.
 func (v *legacyPersonTableType) NewStruct() reform.Struct {
-	return new(LegacyPerson)
+	_ = "STUB: not implemented"
+	return *
+
+	// NewRecord makes a new record for that table.
+	new(reform.Struct)
 }
 
-// NewRecord makes a new record for that table.
 func (v *legacyPersonTableType) NewRecord() reform.Record {
-	return new(LegacyPerson)
+	_ = "STUB: not implemented"
+	return *
+
+	// PKColumnIndex returns an index of primary key column for that table in SQL database.
+	new(reform.Record)
 }
 
-// PKColumnIndex returns an index of primary key column for that table in SQL database.
-func (v *legacyPersonTableType) PKColumnIndex() uint {
-	return uint(v.s.PKFieldIndex)
-}
+func (v *legacyPersonTableType) PKColumnIndex() uint { _ = "STUB: not implemented"; return 0 }
 
 // LegacyPersonTable represents people view or table in SQL database.
 var LegacyPersonTable = &legacyPersonTableType{
@@ -738,64 +638,55 @@ var LegacyPersonTable = &legacyPersonTableType{
 }
 
 // String returns a string representation of this struct or record.
-func (s LegacyPerson) String() string {
-	res := make([]string, 2)
-	res[0] = "ID: " + reform.Inspect(s.ID, true)
-	res[1] = "Name: " + reform.Inspect(s.Name, true)
-	return strings.Join(res, ", ")
-}
+func (s LegacyPerson) String() string { _ = "STUB: not implemented"; return "" }
 
 // Values returns a slice of struct or record field values.
 // Returned interface{} values are never untyped nils.
-func (s *LegacyPerson) Values() []interface{} {
-	return []interface{}{
-		s.ID,
-		s.Name,
-	}
-}
+func (s *LegacyPerson) Values() []interface{} { _ = "STUB: not implemented"; return nil }
 
 // Pointers returns a slice of pointers to struct or record fields.
 // Returned interface{} values are never untyped nils.
-func (s *LegacyPerson) Pointers() []interface{} {
-	return []interface{}{
-		&s.ID,
-		&s.Name,
-	}
-}
+func (s *LegacyPerson) Pointers() []interface{} { _ = "STUB: not implemented"; return nil }
 
 // View returns View object for that struct.
 func (s *LegacyPerson) View() reform.View {
-	return LegacyPersonTable
+	_ = "STUB: not implemented"
+	return *
+
+	// Table returns Table object for that record.
+	new(reform.View)
 }
 
-// Table returns Table object for that record.
 func (s *LegacyPerson) Table() reform.Table {
-	return LegacyPersonTable
+	_ = "STUB: not implemented"
+	return *
+
+	// PKValue returns a value of primary key for that record.
+	// Returned interface{} value is never untyped nil.
+	new(reform.Table)
 }
 
-// PKValue returns a value of primary key for that record.
-// Returned interface{} value is never untyped nil.
 func (s *LegacyPerson) PKValue() interface{} {
-	return s.ID
+	_ = "STUB: not implemented"
+
+	// PKPointer returns a pointer to primary key field for that record.
+	// Returned interface{} value is never untyped nil.
+	return nil
 }
 
-// PKPointer returns a pointer to primary key field for that record.
-// Returned interface{} value is never untyped nil.
 func (s *LegacyPerson) PKPointer() interface{} {
-	return &s.ID
+	_ = "STUB: not implemented"
+
+	// HasPK returns true if record has non-zero primary key set, false otherwise.
+	return nil
 }
 
-// HasPK returns true if record has non-zero primary key set, false otherwise.
-func (s *LegacyPerson) HasPK() bool {
-	return s.ID != LegacyPersonTable.z[LegacyPersonTable.s.PKFieldIndex]
-}
+func (s *LegacyPerson) HasPK() bool { _ = "STUB: not implemented"; return false }
 
 // SetPK sets record primary key, if possible.
 //
 // Deprecated: prefer direct field assignment where possible: s.ID = pk.
-func (s *LegacyPerson) SetPK(pk interface{}) {
-	reform.SetPK(s, pk)
-}
+func (s *LegacyPerson) SetPK(pk interface{}) { _ = "STUB: not implemented"; return }
 
 // check interfaces
 var (

@@ -3,7 +3,6 @@ package reform
 import (
 	"context"
 	"database/sql"
-	"time"
 )
 
 // DBInterface is a subset of *sql.DB used by reform.
@@ -32,73 +31,44 @@ type DB struct {
 
 // NewDB creates new DB object for given SQL database connection.
 // Logger can be nil.
-func NewDB(db *sql.DB, dialect Dialect, logger Logger) *DB {
-	return NewDBFromInterface(db, dialect, logger)
-}
+func NewDB(db *sql.DB, dialect Dialect, logger Logger) *DB { _ = "STUB: not implemented"; return nil }
 
 // NewDBFromInterface creates new DB object for given DBInterface.
 // Can be used for easier integration with existing code or for passing test doubles.
 // Logger can be nil.
 func NewDBFromInterface(db DBInterface, dialect Dialect, logger Logger) *DB {
-	return &DB{
-		Querier: newQuerier(context.Background(), db, "", dialect, logger),
-		db:      db,
-	}
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // DBInterface returns DBInterface associated with a given DB object.
 func (db *DB) DBInterface() DBInterface {
-	return db.db
+	_ = "STUB: not implemented"
+
+	// Begin starts transaction with Querier's context and default options.
+	return *new(DBInterface)
 }
 
-// Begin starts transaction with Querier's context and default options.
-func (db *DB) Begin() (*TX, error) {
-	return db.BeginTx(db.Querier.ctx, nil)
-}
+func (db *DB) Begin() (*TX, error) { _ = "STUB: not implemented"; return nil, nil }
 
 // BeginTx starts transaction with given context and options (can be nil).
 func (db *DB) BeginTx(ctx context.Context, opts *sql.TxOptions) (*TX, error) {
-	db.logBefore("BEGIN", nil)
-	start := time.Now()
-	tx, err := db.db.BeginTx(ctx, opts)
-	db.logAfter("BEGIN", nil, time.Since(start), err)
-	if err != nil {
-		return nil, err
-	}
-	return newTX(ctx, tx, db.Dialect, db.Logger), nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // InTransaction wraps function execution in transaction with Querier's context and default options,
 // rolling back it in case of error or panic, committing otherwise.
-func (db *DB) InTransaction(f func(t *TX) error) error {
-	return db.InTransactionContext(db.Querier.ctx, nil, f)
-}
+func (db *DB) InTransaction(f func(t *TX) error) error { _ = "STUB: not implemented"; return nil }
 
 // InTransactionContext wraps function execution in transaction with given context and options (can be nil),
 // rolling back it in case of error or panic, committing otherwise.
 func (db *DB) InTransactionContext(ctx context.Context, opts *sql.TxOptions, f func(t *TX) error) error {
-	tx, err := db.BeginTx(ctx, opts)
-	if err != nil {
-		return err
-	}
-
-	var committed bool
-	defer func() {
-		if !committed {
-			// always return f() or Commit() error, not possible Rollback() error
-			_ = tx.Rollback()
-		}
-	}()
-
-	err = f(tx)
-	if err == nil {
-		err = tx.Commit()
-	}
-	if err == nil {
-		committed = true
-	}
-	return err
+	_ = "STUB: not implemented"
+	return nil
 }
+
+// always return f() or Commit() error, not possible Rollback() error
 
 // check interfaces
 var (

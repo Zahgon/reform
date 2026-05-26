@@ -5,12 +5,6 @@
 // and not a part of public stable API.
 package parse // import "gopkg.in/reform.v1/parse"
 
-import (
-	"fmt"
-	"strconv"
-	"strings"
-)
-
 // FieldInfo represents information about struct field.
 type FieldInfo struct {
 	Name   string // field name as defined in source file, e.g. Name
@@ -19,23 +13,10 @@ type FieldInfo struct {
 }
 
 // fieldInfoInSync returns true if FieldInfo fields that are set by both file and runtime parser are equal.
-func fieldInfoInSync(fi1, fi2 *FieldInfo) bool {
-	if fi1 == nil {
-		panic("fi1 is nil")
-	}
-	if fi2 == nil {
-		panic("fi2 is nil")
-	}
-
-	return fi1.Name == fi2.Name &&
-		fi1.Type == fi2.Type &&
-		fi1.Column == fi2.Column
-}
+func fieldInfoInSync(fi1, fi2 *FieldInfo) bool { _ = "STUB: not implemented"; return false }
 
 // GoString returns struct field information as Go code string.
-func (fi *FieldInfo) GoString() string {
-	return fmt.Sprintf("{Name: %q, Type: %q, Column: %q}", fi.Name, fi.Type, fi.Column)
-}
+func (fi *FieldInfo) GoString() string { _ = "STUB: not implemented"; return "" }
 
 // StructInfo represents information about struct.
 type StructInfo struct {
@@ -47,137 +28,32 @@ type StructInfo struct {
 }
 
 // structInfoInSync returns true if FieldInfo fields that are set by both file and runtime parser are equal.
-func structInfoInSync(si1, si2 *StructInfo) bool {
-	if si1 == nil {
-		panic("si1 is nil")
-	}
-	if si2 == nil {
-		panic("si2 is nil")
-	}
-
-	inSync := si1.Type == si2.Type &&
-		si1.SQLSchema == si2.SQLSchema &&
-		si1.SQLName == si2.SQLName &&
-		si1.PKFieldIndex == si2.PKFieldIndex
-	if !inSync {
-		return false
-	}
-
-	if len(si1.Fields) != len(si2.Fields) {
-		return false
-	}
-	for i := range si1.Fields {
-		if inSync = fieldInfoInSync(&si1.Fields[i], &si2.Fields[i]); !inSync {
-			return false
-		}
-	}
-	return true
-}
+func structInfoInSync(si1, si2 *StructInfo) bool { _ = "STUB: not implemented"; return false }
 
 // GoString returns struct information as Go code string.
-func (s *StructInfo) GoString() string {
-	res := "parse.StructInfo{\n"
-
-	res += fmt.Sprintf("\tType: %q,\n", s.Type)
-	if s.SQLSchema != "" {
-		res += fmt.Sprintf("\tSQLSchema: %q,\n", s.SQLSchema)
-	}
-	res += fmt.Sprintf("\tSQLName: %q,\n", s.SQLName)
-
-	res += "\tFields: []parse.FieldInfo{\n"
-	for _, f := range s.Fields {
-		res += fmt.Sprintf("\t\t%s,\n", f.GoString())
-	}
-	res += "\t},\n"
-
-	res += fmt.Sprintf("\tPKFieldIndex: %d,\n", s.PKFieldIndex)
-
-	res += "}"
-	return res
-}
+func (s *StructInfo) GoString() string { _ = "STUB: not implemented"; return "" }
 
 // Columns returns a new slice of column names.
-func (s *StructInfo) Columns() []string {
-	res := make([]string, len(s.Fields))
-	for i, f := range s.Fields {
-		res[i] = f.Column
-	}
-	return res
-}
+func (s *StructInfo) Columns() []string { _ = "STUB: not implemented"; return nil }
 
 // ColumnsGoString returns column names as Go code string.
-func (s *StructInfo) ColumnsGoString() string {
-	res := make([]string, len(s.Fields))
-	for i, f := range s.Fields {
-		res[i] = strconv.Quote(f.Column)
-	}
-	return "[]string{\n\t" + strings.Join(res, ",\n\t") + ",\n}"
-}
+func (s *StructInfo) ColumnsGoString() string { _ = "STUB: not implemented"; return "" }
 
 // IsTable returns true if this object represent information for table, false for view.
-func (s *StructInfo) IsTable() bool {
-	return s.PKFieldIndex >= 0
-}
+func (s *StructInfo) IsTable() bool { _ = "STUB: not implemented"; return false }
 
 // PKField returns a primary key field, panics for views.
-func (s *StructInfo) PKField() FieldInfo {
-	if !s.IsTable() {
-		panic("reform: not a table")
-	}
-	return s.Fields[s.PKFieldIndex]
-}
+func (s *StructInfo) PKField() FieldInfo { _ = "STUB: not implemented"; return *new(FieldInfo) }
 
 // AssertUpToDate checks that given StructInfo matches given object.
 // It is used during program initialization to check that generated files are up-to-date.
-func AssertUpToDate(si *StructInfo, obj interface{}) {
-	msg := fmt.Sprintf(`reform:
-		%s struct information is not up-to-date.
-		Typically this means that %s type definition was changed, but 'reform' command / 'go generate' was not run.
-
-		`, si.Type, si.Type)
-	si2, err := Object(obj, si.SQLSchema, si.SQLName)
-	if err != nil {
-		panic(msg + err.Error())
-	}
-	if !structInfoInSync(si, si2) {
-		panic(msg)
-	}
-}
+func AssertUpToDate(si *StructInfo, obj interface{}) { _ = "STUB: not implemented"; return }
 
 // parseStructFieldTag is used by both file and runtime parsers
 func parseStructFieldTag(tag string) (sqlName string, isPK bool) {
-	parts := strings.Split(tag, ",")
-	if len(parts) == 0 || len(parts) > 2 {
-		return
-	}
-
-	if len(parts) == 2 {
-		switch parts[1] {
-		case "pk":
-			isPK = true
-		default:
-			return
-		}
-	}
-
-	sqlName = parts[0]
-	return
+	_ = "STUB: not implemented"
+	return "", false
 }
 
 // checkFields is used by both file and runtime parsers
-func checkFields(res *StructInfo) error {
-	if len(res.Fields) == 0 {
-		return fmt.Errorf(`reform: %s has no fields with "reform:" tag, it is not allowed`, res.Type)
-	}
-
-	dupes := make(map[string]string)
-	for _, f := range res.Fields {
-		if f2, ok := dupes[f.Column]; ok {
-			return fmt.Errorf(`reform: %s has field %s with "reform:" tag with duplicate column name %s (used by %s), it is not allowed`,
-				res.Type, f.Name, f.Column, f2)
-		}
-		dupes[f.Column] = f.Name
-	}
-
-	return nil
-}
+func checkFields(res *StructInfo) error { _ = "STUB: not implemented"; return nil }

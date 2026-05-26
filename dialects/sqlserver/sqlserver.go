@@ -2,43 +2,32 @@
 package sqlserver // import "gopkg.in/reform.v1/dialects/sqlserver"
 
 import (
-	"strconv"
-
 	"gopkg.in/reform.v1"
 )
 
 type sqlserver struct{}
 
-func (sqlserver) String() string {
-	return "sqlserver"
-}
+func (sqlserver) String() string { _ = "STUB: not implemented"; return "" }
 
-func (sqlserver) Placeholder(index int) string {
-	return "@P" + strconv.Itoa(index)
-}
+func (sqlserver) Placeholder(index int) string { _ = "STUB: not implemented"; return "" }
 
-func (sqlserver) Placeholders(start, count int) []string {
-	res := make([]string, count)
-	for i := 0; i < count; i++ {
-		res[i] = "@P" + strconv.Itoa(1+i)
-	}
-	return res
-}
+func (sqlserver) Placeholders(start, count int) []string { _ = "STUB: not implemented"; return nil }
 
-func (sqlserver) QuoteIdentifier(identifier string) string {
-	return "[" + identifier + "]"
-}
+func (sqlserver) QuoteIdentifier(identifier string) string { _ = "STUB: not implemented"; return "" }
 
 func (sqlserver) LastInsertIdMethod() reform.LastInsertIdMethod {
-	return reform.OutputInserted
+	_ = "STUB: not implemented"
+	return *new(reform.LastInsertIdMethod)
 }
 
 func (sqlserver) SelectLimitMethod() reform.SelectLimitMethod {
-	return reform.SelectTop
+	_ = "STUB: not implemented"
+	return *new(reform.SelectLimitMethod)
 }
 
 func (sqlserver) DefaultValuesMethod() reform.DefaultValuesMethod {
-	return reform.DefaultValues
+	_ = "STUB: not implemented"
+	return *new(reform.DefaultValuesMethod)
 }
 
 // Dialect implements reform.Dialect for Microsoft SQL Server.

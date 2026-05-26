@@ -4,7 +4,6 @@ import (
 	"context"
 	"database/sql"
 	"errors"
-	"reflect"
 )
 
 var (
@@ -210,13 +209,7 @@ type Dialect interface {
 // SetPK sets record's primary key, if possible.
 //
 // Deprecated: prefer direct field assignment where possible.
-func SetPK(r Record, pk interface{}) {
-	fV := reflect.ValueOf(r.Pointers()[r.Table().PKColumnIndex()]).Elem()
-	pkV := reflect.ValueOf(pk)
-	if t := fV.Type(); t.ConvertibleTo(pkV.Type()) {
-		fV.Set(pkV.Convert(t))
-	}
-}
+func SetPK(r Record, pk interface{}) { _ = "STUB: not implemented"; return }
 
 // check interfaces
 var (

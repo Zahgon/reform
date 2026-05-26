@@ -3,7 +3,6 @@ package reform
 import (
 	"context"
 	"database/sql"
-	"time"
 )
 
 // TXInterface is a subset of *sql.Tx used by reform.
@@ -31,41 +30,26 @@ type TX struct {
 
 // NewTX creates new TX object for given SQL database transaction.
 // Logger can be nil.
-func NewTX(tx *sql.Tx, dialect Dialect, logger Logger) *TX {
-	return NewTXFromInterface(tx, dialect, logger)
-}
+func NewTX(tx *sql.Tx, dialect Dialect, logger Logger) *TX { _ = "STUB: not implemented"; return nil }
 
 // NewTXFromInterface creates new TX object for given TXInterface.
 // Can be used for easier integration with existing code or for passing test doubles.
 // Logger can be nil.
 func NewTXFromInterface(tx TXInterface, dialect Dialect, logger Logger) *TX {
-	return newTX(context.Background(), tx, dialect, logger)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 func newTX(ctx context.Context, tx TXInterface, dialect Dialect, logger Logger) *TX {
-	return &TX{
-		Querier: newQuerier(ctx, tx, "", dialect, logger),
-		tx:      tx,
-	}
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Commit commits the transaction.
-func (tx *TX) Commit() error {
-	tx.logBefore("COMMIT", nil)
-	start := time.Now()
-	err := tx.tx.Commit()
-	tx.logAfter("COMMIT", nil, time.Since(start), err)
-	return err
-}
+func (tx *TX) Commit() error { _ = "STUB: not implemented"; return nil }
 
 // Rollback aborts the transaction.
-func (tx *TX) Rollback() error {
-	tx.logBefore("ROLLBACK", nil)
-	start := time.Now()
-	err := tx.tx.Rollback()
-	tx.logAfter("ROLLBACK", nil, time.Since(start), err)
-	return err
-}
+func (tx *TX) Rollback() error { _ = "STUB: not implemented"; return nil }
 
 // check interfaces
 var (

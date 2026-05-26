@@ -2,43 +2,32 @@
 package postgresql // import "gopkg.in/reform.v1/dialects/postgresql"
 
 import (
-	"strconv"
-
 	"gopkg.in/reform.v1"
 )
 
 type postgresql struct{}
 
-func (postgresql) String() string {
-	return "postgresql"
-}
+func (postgresql) String() string { _ = "STUB: not implemented"; return "" }
 
-func (postgresql) Placeholder(index int) string {
-	return "$" + strconv.Itoa(index)
-}
+func (postgresql) Placeholder(index int) string { _ = "STUB: not implemented"; return "" }
 
-func (postgresql) Placeholders(start, count int) []string {
-	res := make([]string, count)
-	for i := 0; i < count; i++ {
-		res[i] = "$" + strconv.Itoa(start+i)
-	}
-	return res
-}
+func (postgresql) Placeholders(start, count int) []string { _ = "STUB: not implemented"; return nil }
 
-func (postgresql) QuoteIdentifier(identifier string) string {
-	return `"` + identifier + `"`
-}
+func (postgresql) QuoteIdentifier(identifier string) string { _ = "STUB: not implemented"; return "" }
 
 func (postgresql) LastInsertIdMethod() reform.LastInsertIdMethod {
-	return reform.Returning
+	_ = "STUB: not implemented"
+	return *new(reform.LastInsertIdMethod)
 }
 
 func (postgresql) SelectLimitMethod() reform.SelectLimitMethod {
-	return reform.Limit
+	_ = "STUB: not implemented"
+	return *new(reform.SelectLimitMethod)
 }
 
 func (postgresql) DefaultValuesMethod() reform.DefaultValuesMethod {
-	return reform.DefaultValues
+	_ = "STUB: not implemented"
+	return *new(reform.DefaultValuesMethod)
 }
 
 // Dialect implements reform.Dialect for PostgreSQL.

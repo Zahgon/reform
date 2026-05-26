@@ -1,12 +1,9 @@
 package main
 
 import (
-	"bytes"
 	"flag"
 	"fmt"
 	"os"
-	"strings"
-	"text/tabwriter"
 
 	"gopkg.in/reform.v1"
 )
@@ -36,52 +33,8 @@ a query is read from stdin until EOF, then executed.
 }
 
 // cmdQuery implements query command.
-func cmdQuery(db *reform.DB, files []string) {
-	queries := readFiles(files, *querySplitF)
-	for _, q := range queries {
-		rows, err := db.Query(q)
-		if err != nil {
-			logger.Fatalf("failed to query %s: %s", q, err)
-		}
-		columns, err := rows.Columns()
-		if err != nil {
-			logger.Fatalf("failed to get columns for %s: %s", q, err)
-		}
-		logger.Debugf("result columns: %v", columns)
+func cmdQuery(db *reform.DB, files []string) { _ = "STUB: not implemented"; return }
 
-		// write table header
-		w := tabwriter.NewWriter(os.Stdout, 0, 0, 1, ' ', tabwriter.Debug)
-		if _, err = fmt.Fprintln(w, strings.Join(columns, "\t")); err != nil {
-			logger.Fatalf("%s", err)
-		}
-		for i, c := range columns {
-			columns[i] = strings.Repeat("-", len(c))
-		}
-		if _, err = fmt.Fprintln(w, strings.Join(columns, "\t")); err != nil {
-			logger.Fatalf("%s", err)
-		}
+// write table header
 
-		// read all rows, scan each field to []byte
-		for rows.Next() {
-			line := make([][]byte, len(columns))
-			dests := make([]interface{}, len(line))
-			for i := range dests {
-				dests[i] = &line[i]
-			}
-			if err = rows.Scan(dests...); err != nil {
-				logger.Fatalf("%s", err)
-			}
-			fmt.Fprintf(w, "%s\n", bytes.Join(line, []byte("\t")))
-		}
-		if err = rows.Err(); err != nil {
-			logger.Fatalf("%s", err)
-		}
-
-		if err = w.Flush(); err != nil {
-			logger.Fatalf("%s", err)
-		}
-		if err = rows.Close(); err != nil {
-			logger.Fatalf("%s", err)
-		}
-	}
-}
+// read all rows, scan each field to []byte

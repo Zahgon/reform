@@ -1,10 +1,8 @@
 package main
 
 import (
-	"bytes"
 	"flag"
 	"fmt"
-	"io/ioutil"
 	"os"
 
 	"gopkg.in/reform.v1"
@@ -36,63 +34,14 @@ a query is read from stdin until EOF, then executed.
 
 // readFiles reads queries from given files, or from stdin, if files are not given
 func readFiles(files []string, split bool) (queries []string) {
+	_ = "STUB: not implemented"
 	// read stdin
-	if len(files) == 0 {
-		logger.Debugf("no files are given, reading stdin")
-		b, err := ioutil.ReadAll(os.Stdin)
-		if err != nil {
-			logger.Fatalf("failed to read stdin: %s", err)
-		}
-		b = bytes.TrimSpace(b)
-		if len(b) > 0 {
-			if split {
-				s := bytes.Split(b, []byte(";"))
-				for _, ss := range s {
-					ss = bytes.TrimSpace(ss)
-					if len(ss) > 0 {
-						queries = append(queries, string(ss))
-					}
-				}
-			} else {
-				queries = append(queries, string(b))
-			}
-		}
-
-		return
-	}
-
-	// read files
-	for _, f := range files {
-		logger.Debugf("reading file %s", f)
-		b, err := ioutil.ReadFile(f) //nolint:gosec
-		if err != nil {
-			logger.Fatalf("failed to read file %s: %s", f, err)
-		}
-		b = bytes.TrimSpace(b)
-		if len(b) > 0 {
-			if split {
-				s := bytes.Split(b, []byte(";"))
-				for _, ss := range s {
-					ss = bytes.TrimSpace(ss)
-					if len(ss) > 0 {
-						queries = append(queries, string(ss))
-					}
-				}
-			} else {
-				queries = append(queries, string(b))
-			}
-		}
-	}
-
-	return
+	return nil
 }
+
+// read files
+
+//nolint:gosec
 
 // cmdExec implements exec command.
-func cmdExec(db *reform.DB, files []string) {
-	queries := readFiles(files, *execSplitF)
-	for _, q := range queries {
-		if _, err := db.Exec(q); err != nil {
-			logger.Fatalf("failed to execute %s: %s", q, err)
-		}
-	}
-}
+func cmdExec(db *reform.DB, files []string) { _ = "STUB: not implemented"; return }
